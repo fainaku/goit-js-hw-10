@@ -32,3 +32,9 @@ img {
   max-width: 100%;
   height: auto;
 }
+html {
+  box-sizing: border-box;
+}
+* {
+  box-sizing: inherit;
+}
