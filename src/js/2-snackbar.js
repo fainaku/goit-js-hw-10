@@ -7,29 +7,19 @@ formEl.addEventListener('submit', event => {
   const state = event.currentTarget.elements.state.value;
   const delay = Number(event.currentTarget.elements.delay.value);
   const promise = new Promise((resolve, reject) => {
-    if (state === 'fulfilled') {
-      setTimeout(
-        () =>
-          resolve(
-            iziToast.success({
-              message: `Fulfilled promise in ${delay}ms`,
-            })
-          ),
-        delay
-      );
-    } else {
-      setTimeout(
-        () =>
-          reject(
-            iziToast.error({
-              message: `Rejected promise in ${delay}ms`,
-            })
-          ),
-        delay
-      );
-    }
+    setTimeout(() => {
+      state === 'fulfilled' ? resolve() : reject();
+    }, delay);
   });
   promise
-    .then(result => console.log(result))
-    .catch(error => console.log(error));
+    .then(() =>
+      iziToast.success({
+        message: `Fulfilled promise in ${delay}ms`,
+      })
+    )
+    .catch(() =>
+      iziToast.error({
+        message: `Rejected promise in ${delay}ms`,
+      })
+    );
 });
